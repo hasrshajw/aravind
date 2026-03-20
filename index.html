@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncSkill - Landing Page</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lottie & Lucide -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --font-main: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --color-dark-teal: #002726;
+            --color-accent-green: #33C375;
+            --color-accent-hover: #52e094;
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-text-muted: #7A7A7A;
+            --color-grid-lines: rgba(255, 255, 255, 0.04);
+            --ease-out: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --bg-main: #ffffff; /* pure white */
+
+            /* Enterprise section variables */
+            --font-heading: 'Plus Jakarta Sans', sans-serif;
+            --color-sync-text: #0F2A24;
+            --color-sync-desc: #37474F;
+
+            /* New section variables (Department Advantages) */
+            --color-dark-teal-alt: #002726;
+            --color-accent-green-alt: #41B66E;      /* distinct from hero accent */
+            --color-card-bg: #0D3B39;                /* lighter teal for cards */
+            --color-card-border: rgba(255, 255, 255, 0.15);
+            --color-check-green: #25d366; 
+        }
+
+        /* ==============================
+           GLOBAL RESET & TYPOGRAPHY
+           ============================== */
+        *, *::before, *::after { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-font-smoothing: antialiased; 
+        }
+
+        body { 
+            background-color: var(--bg-main); 
+            font-family: var(--font-main); 
+            overflow-x: hidden;
+            padding-top: 40px; 
+            color: var(--color-black);
+        }
+
+        a, button { 
+            -webkit-tap-highlight-color: transparent; 
+            outline: none; 
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--color-sync-text);
+            letter-spacing: -0.02em;
+        }
+
+        /* ==============================
+           HERO SECTION STYLES
+           ============================== */
+        .hero-section { 
+            width: 100%; 
+            padding: 1.2rem 0; 
+            margin-bottom: 20px; 
+            margin-top: 1.5rem; 
+        }
+
+        .content-card { 
+            width: 92%; 
+            max-width: 1400px; 
+            margin: auto; 
+            position: relative; 
+            border-radius: 2rem; 
+            overflow: hidden; 
+            background-color: var(--color-dark-teal); 
+            background-image: 
+                linear-gradient(var(--color-grid-lines) 1px, transparent 1px), 
+                linear-gradient(90deg, var(--color-grid-lines) 1px, transparent 1px), 
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); 
+            background-size: 80px 80px, 80px 80px, 120px 120px; 
+            background-blend-mode: normal, normal, overlay; 
+            padding: 3.5rem 4rem; 
+            min-height: 420px; 
+            display: flex; 
+            align-items: center; 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+
+        .content-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: -20%; 
+            left: -10%; 
+            width: 60%; 
+            height: 140%; 
+            background: radial-gradient(circle, rgba(51, 195, 117, 0.07) 0%, transparent 70%); 
+            pointer-events: none; 
+        }
+
+        .hero-flex { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 3rem; 
+            width: 100%; 
+            position: relative; 
+            z-index: 1; 
+        }
+
+        .hero-left { 
+            flex: 1.3; 
+            text-align: left; 
+        }
+
+        .eyebrow-text {
+            display: inline-block;
+            color: var(--color-accent-green);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-heading { 
+            font-size: 3.5rem; 
+            font-weight: 600; 
+            color: var(--color-white); 
+            line-height: 1.15; 
+            letter-spacing: -0.02em; 
+            margin-bottom: 1.25rem; 
+        }
+
+        .hero-heading span.top-text { 
+            display: block; 
+        }
+
+        .hero-paragraph { 
+            color: rgba(255, 255, 255, 0.7); 
+            font-size: 1.15rem; 
+            max-width: 540px; 
+            margin-bottom: 2rem; 
+            line-height: 1.6; 
+        }
+
+        .explore-button { 
+            background-color: var(--color-accent-green); 
+            color: var(--color-dark-teal); 
+            font-weight: 600; 
+            font-size: 1rem; 
+            padding: 1rem 2.2rem; 
+            border-radius: 12px; 
+            border: none; 
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+            transition: all 0.4s var(--ease-out); 
+            text-decoration: none; 
+        }
+
+        .explore-button:hover { 
+            background-color: var(--color-accent-hover); 
+            transform: translateY(-2px); 
+            box-shadow: 0 12px 24px rgba(51, 195, 117, 0.2); 
+        }
+
+        .hero-right { 
+            flex: 0.7; 
+            display: flex; 
+            justify-content: flex-end; 
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%); 
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%); 
+        }
+
+        /* ==============================
+           SOCIAL PROOF / MARQUEE STYLES
+           ============================== */
+        .social-proof-section {
+            padding: 2.5rem 0 4rem 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .social-proof-container {
+            max-width: 80rem; /* 1280px */
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .social-proof-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #64748b; /* slate-500 */
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .marquee-wrapper {
+            position: relative;
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .marquee-wrapper::before,
+        .marquee-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 10;
+            height: 100%;
+            width: 48px;
+        }
+        
+        .marquee-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-main), transparent);
+        }
+        
+        .marquee-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-main), transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: infinite-scroll 25s linear infinite;
+            opacity: 0.6;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+        }
+
+        .marquee-track:hover {
+            filter: grayscale(0%);
+            animation-play-state: paused;
+        }
+
+        @keyframes infinite-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .marquee-group {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: space-around;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b; /* slate-800 */
+        }
+
+        .marquee-icon { width: 32px; height: 32px; }
+        .icon-aws { color: #2563eb; }      /* blue-600 */
+        .icon-google { color: #22c55e; }   /* green-500 */
+        .icon-meta { color: #3b82f6; }     /* blue-500 */
+        .icon-microsoft { color: #0ea5e9; }/* sky-500 */
+        .icon-amazon { color: #f97316; }   /* orange-500 */
+
+
+        /* ==============================
+           CONFIDENCE SECTION STYLES
+           ============================== */
+        .section-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 80px 20px 100px;
+            overflow-x: hidden;
+            background-color: var(--color-white);
+        }
+
+        .content-container {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heading-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            color: var(--color-text-muted);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .title-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .main-title {
+            font-size: 36px;
+            color: var(--color-black);
+            font-weight: 500;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .features-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .feature-box {
+            display: flex;
+            flex-direction: row; 
+            align-items: center;
+            flex: 1;
+            max-width: 330px;
+            gap: 15px;
+        }
+
+        .icon-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-wrapper svg {
+            width: 55px;
+            height: 55px;
+        }
+
+        .feature-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-black);
+            line-height: 1.4;
+            text-align: left;
+            max-width: 210px; 
+        }
+
+        /* ==============================
+           ENTERPRISE SECTION STYLES (existing)
+           ============================== */
+        .feature-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: rgba(65, 182, 110, 0.1);
+            color: #41B66E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%; 
+            padding: 12px 28px;
+            background: #41B66E; /* Accent Green */
+            color: #0B3A38; 
+            border-radius: 10px;
+            font-weight: 500; 
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: inset 0 0 0 2px rgba(11, 58, 56, 0.2);
+            transition: background 0.25s ease;
+            margin-top: 12px;
+        }
+
+        .btn:hover {
+            background: #38a862;
+        }
+
+        .line-height-relaxed {
+            line-height: 1.6;
+        }
+
+        /* ==============================
+           NEW SECTION: DEPARTMENT ADVANTAGES
+           ============================== */
+        .bg-teal-gradient {
+            background: radial-gradient(circle at top right, #0A3230 0%, var(--color-dark-teal-alt) 100%);
+        }
+
+        .program-card {
+            background-color: var(--color-card-bg);
+            border-radius: 20px;
+            padding: 24px; 
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--color-card-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (min-width: 768px) {
+            .program-card {
+                padding: 40px;
+            }
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-check-green);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .check-icon-mark {
+            stroke: var(--color-card-bg);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .bg-arrow {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 140px; 
+            height: auto;
+            opacity: 1; 
+            pointer-events: none;
+            transition: transform 0.3s ease;
+        }
+
+        .program-card:hover .bg-arrow {
+            transform: scale(1.05) translate(-2px, -2px);
+        }
+
+        @media (min-width: 768px) {
+            .bg-arrow {
+                width: 160px; 
+            }
+        }
+
+        /* ==============================
+           RESPONSIVE BREAKPOINTS
+           ============================== */
+        @media (min-width: 768px) {
+            .marquee-group {
+                gap: 4rem;
+                padding: 0 2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .content-card { 
+                padding: 2.5rem 1.5rem; 
+                text-align: center; 
+                background-size: 60px 60px, 60px 60px, 120px 120px; 
+            }
+            .content-card::before { 
+                top: 0; 
+                left: 50%; 
+                transform: translateX(-50%); 
+                width: 100%; 
+                height: 100%; 
+                background: radial-gradient(circle, rgba(51, 195, 117, 0.12) 0%, transparent 80%); 
+            }
+            .hero-flex { 
+                flex-direction: column-reverse; 
+                gap: 1.5rem; 
+            }
+            .hero-right { 
+                display: none; 
+            }
+            .hero-left { 
+                flex: none; 
+                width: 100%; 
+            }
+            .hero-heading { 
+                font-size: 2.2rem; 
+                line-height: 1.2; 
+            }
+            .hero-paragraph { 
+                font-size: 1rem; 
+                margin: 0 auto 1.5rem auto; 
+                max-width: 100%; 
+            }
+        }
+
+        @media (max-width: 850px) {
+            .section-wrapper {
+                padding: 60px 20px;
+            }
+            .subtitle {
+                font-size: 22px;
+            }
+            .main-title {
+                font-size: 32px;
+                letter-spacing: -0.5px;
+                max-width: 420px;
+                margin: 0 auto;
+                line-height: 1.2;
+            }
+            .heading-section {
+                margin-bottom: 50px;
+            }
+            .features-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+                width: 100%;
+                max-width: 380px;
+                margin: 0 auto;
+            }
+            .feature-box {
+                flex-direction: row;
+                text-align: left;
+                gap: 15px;
+                max-width: 100%;
+                width: 100%;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            .icon-wrapper svg {
+                width: 45px;
+                height: 48px;
+            }
+            .feature-text {
+                text-align: left;
+                max-width: none;
+                margin: 0;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="content-card">
+            <div class="hero-flex">
+                <div class="hero-left">
+                    <span class="eyebrow-text">Make your Students to</span>
+                    <h1 class="hero-heading">
+                        <span class="top-text">Become Top 1%</span> 
+                        in the AI-First World
+                    </h1>
+                    <p class="hero-paragraph">
+                        Whether it is Product, Growth, Design, Business, Tech or Data, SyncSkill is the place to learn from top experts in the field to become the Top 1%.
+                    </p>
+                    <a href="/programs.html" class="explore-button">
+                        <span>Explore Programs</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
+                            <path d="M1 7.11108L6 12L11 7.11108" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M1 1L6 5.88889L11 1" stroke="currentColor" stroke-opacity="0.4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-right">
+                    <lottie-player src="assets/bg.json" background="transparent" speed="0.8" style="width: 100%; max-width: 360px;" loop autoplay></lottie-player>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF SECTION -->
+    <section class="social-proof-section">
+        <div class="social-proof-container">
+            <p class="social-proof-title">Your students will be mentored by professionals from</p>
+            
+            <div class="marquee-wrapper">
+                <div class="marquee-track">
+                    
+                    <div class="marquee-group">
+                        <div class="marquee-item"><i data-lucide="cloud" class="marquee-icon icon-aws"></i> AWS</div>
+                        <div class="marquee-item"><i data-lucide="chrome" class="marquee-icon icon-google"></i> Google</div>
+                        <div class="marquee-item"><i data-lucide="facebook" class="marquee-icon icon-meta"></i> Meta</div>
+                        <div class="marquee-item"><i data-lucide="monitor" class="marquee-icon icon-microsoft"></i> Microsoft</div>
+                        <div class="marquee-item"><i data-lucide="shopping-bag" class="marquee-icon icon-amazon"></i> Amazon</div>
+                    </div>
+
+                    <div class="marquee-group" aria-hidden="true">
+                        <div class="marquee-item"><i data-lucide="cloud" class="marquee-icon icon-aws"></i> AWS</div>
+                        <div class="marquee-item"><i data-lucide="chrome" class="marquee-icon icon-google"></i> Google</div>
+                        <div class="marquee-item"><i data-lucide="facebook" class="marquee-icon icon-meta"></i> Meta</div>
+                        <div class="marquee-item"><i data-lucide="monitor" class="marquee-icon icon-microsoft"></i> Microsoft</div>
+                        <div class="marquee-item"><i data-lucide="shopping-bag" class="marquee-icon icon-amazon"></i> Amazon</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONFIDENCE SECTION -->
+    <section class="section-wrapper">
+        <div class="content-container">
+            
+            <div class="heading-section">
+                <h2 class="subtitle">Are your students struggling</h2>
+                <div class="title-wrapper">
+                    <h1 class="main-title">To prove what they’ve actually learned?</h1>
+                </div>
+            </div>
+
+            <div class="features-container">
+                <div class="feature-box">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                            <circle cx="43.5" cy="43.5" r="41.5" fill="#FF0000" fill-opacity="0.19"></circle>
+                            <circle cx="43.5" cy="43.5" r="31.5" fill="#FF0000"></circle>
+                            <path d="M41.2799 54.2422C40.9218 54.5973 40.6771 55.0506 40.5767 55.5448C40.4762 56.039 40.5245 56.5518 40.7155 57.0186C40.9065 57.4853 41.2315 57.8849 41.6496 58.1669C42.0676 58.4489 42.5599 58.6007 43.0642 58.6029C43.7405 58.5974 44.389 58.3327 44.876 57.8634C45.3493 57.3796 45.6144 56.7297 45.6144 56.0529C45.6144 55.3761 45.3493 54.7262 44.876 54.2424C44.3878 53.7874 43.7453 53.5344 43.078 53.5344C42.4107 53.5344 41.7681 53.7873 41.2799 54.2422ZM51.7449 34.782C51.4524 33.5596 50.9011 32.4141 50.1284 31.4228C49.3557 30.4315 48.3794 29.6174 47.2653 29.0353C45.2199 27.9555 42.8359 27.7094 40.613 28.3486C38.3902 28.9878 36.501 30.4626 35.3416 32.4639C35.0034 33.0498 34.9118 33.746 35.087 34.3994C35.2621 35.0527 35.6896 35.6098 36.2755 35.948C36.8613 36.2861 37.5575 36.3777 38.2109 36.2026C38.8643 36.0274 39.4214 35.5999 39.7595 35.0141C40.0957 34.4331 40.5786 33.9506 41.1599 33.615C41.7412 33.2793 42.4005 33.1022 43.0717 33.1015C44.0847 33.102 45.0561 33.5044 45.7727 34.2203C46.4894 34.9362 46.8927 35.9072 46.8943 36.9201C46.8959 37.9331 46.4955 38.9053 45.7811 39.6235C45.0666 40.3416 44.0965 40.747 43.0835 40.7506H43.0771C42.4011 40.7502 41.7525 41.0182 41.2739 41.4957C40.7954 41.9733 40.526 42.6213 40.525 43.2973L40.5216 45.8521L40.5303 47.1334C40.532 47.8087 40.8015 48.4556 41.2795 48.9325C41.7576 49.4094 42.4052 49.6772 43.0804 49.6773H43.0866C43.763 49.6757 44.4109 49.4054 44.888 48.926C45.3651 48.4466 45.6322 47.7973 45.6305 47.121L45.6267 45.4344C47.8195 44.7844 49.6781 43.3156 50.8171 41.3323C51.9562 39.3491 52.2884 37.0036 51.7449 34.782Z" fill="white"></path>
+                        </svg>
+                    </div>
+                    <p class="feature-text">Students struggle to explain what they’ve learned</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                            <circle cx="43.5" cy="43.5" r="41.5" fill="#FF0000" fill-opacity="0.19"></circle>
+                            <circle cx="43.5" cy="43.5" r="31.5" fill="#FF0000"></circle>
+                            <path d="M41.2799 54.2422C40.9218 54.5973 40.6771 55.0506 40.5767 55.5448C40.4762 56.039 40.5245 56.5518 40.7155 57.0186C40.9065 57.4853 41.2315 57.8849 41.6496 58.1669C42.0676 58.4489 42.5599 58.6007 43.0642 58.6029C43.7405 58.5974 44.389 58.3327 44.876 57.8634C45.3493 57.3796 45.6144 56.7297 45.6144 56.0529C45.6144 55.3761 45.3493 54.7262 44.876 54.2424C44.3878 53.7874 43.7453 53.5344 43.078 53.5344C42.4107 53.5344 41.7681 53.7873 41.2799 54.2422ZM51.7449 34.782C51.4524 33.5596 50.9011 32.4141 50.1284 31.4228C49.3557 30.4315 48.3794 29.6174 47.2653 29.0353C45.2199 27.9555 42.8359 27.7094 40.613 28.3486C38.3902 28.9878 36.501 30.4626 35.3416 32.4639C35.0034 33.0498 34.9118 33.746 35.087 34.3994C35.2621 35.0527 35.6896 35.6098 36.2755 35.948C36.8613 36.2861 37.5575 36.3777 38.2109 36.2026C38.8643 36.0274 39.4214 35.5999 39.7595 35.0141C40.0957 34.4331 40.5786 33.9506 41.1599 33.615C41.7412 33.2793 42.4005 33.1022 43.0717 33.1015C44.0847 33.102 45.0561 33.5044 45.7727 34.2203C46.4894 34.9362 46.8927 35.9072 46.8943 36.9201C46.8959 37.9331 46.4955 38.9053 45.7811 39.6235C45.0666 40.3416 44.0965 40.747 43.0835 40.7506H43.0771C42.4011 40.7502 41.7525 41.0182 41.2739 41.4957C40.7954 41.9733 40.526 42.6213 40.525 43.2973L40.5216 45.8521L40.5303 47.1334C40.532 47.8087 40.8015 48.4556 41.2795 48.9325C41.7576 49.4094 42.4052 49.6772 43.0804 49.6773H43.0866C43.763 49.6757 44.4109 49.4054 44.888 48.926C45.3651 48.4466 45.6322 47.7973 45.6305 47.121L45.6267 45.4344C47.8195 44.7844 49.6781 43.3156 50.8171 41.3323C51.9562 39.3491 52.2884 37.0036 51.7449 34.782Z" fill="white"></path>
+                        </svg>
+                    </div>
+                    <p class="feature-text">Projects lack real-world value</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                            <circle cx="43.5" cy="43.5" r="41.5" fill="#FF0000" fill-opacity="0.19"></circle>
+                            <circle cx="43.5" cy="43.5" r="31.5" fill="#FF0000"></circle>
+                            <path d="M41.2799 54.2422C40.9218 54.5973 40.6771 55.0506 40.5767 55.5448C40.4762 56.039 40.5245 56.5518 40.7155 57.0186C40.9065 57.4853 41.2315 57.8849 41.6496 58.1669C42.0676 58.4489 42.5599 58.6007 43.0642 58.6029C43.7405 58.5974 44.389 58.3327 44.876 57.8634C45.3493 57.3796 45.6144 56.7297 45.6144 56.0529C45.6144 55.3761 45.3493 54.7262 44.876 54.2424C44.3878 53.7874 43.7453 53.5344 43.078 53.5344C42.4107 53.5344 41.7681 53.7873 41.2799 54.2422ZM51.7449 34.782C51.4524 33.5596 50.9011 32.4141 50.1284 31.4228C49.3557 30.4315 48.3794 29.6174 47.2653 29.0353C45.2199 27.9555 42.8359 27.7094 40.613 28.3486C38.3902 28.9878 36.501 30.4626 35.3416 32.4639C35.0034 33.0498 34.9118 33.746 35.087 34.3994C35.2621 35.0527 35.6896 35.6098 36.2755 35.948C36.8613 36.2861 37.5575 36.3777 38.2109 36.2026C38.8643 36.0274 39.4214 35.5999 39.7595 35.0141C40.0957 34.4331 40.5786 33.9506 41.1599 33.615C41.7412 33.2793 42.4005 33.1022 43.0717 33.1015C44.0847 33.102 45.0561 33.5044 45.7727 34.2203C46.4894 34.9362 46.8927 35.9072 46.8943 36.9201C46.8959 37.9331 46.4955 38.9053 45.7811 39.6235C45.0666 40.3416 44.0965 40.747 43.0835 40.7506H43.0771C42.4011 40.7502 41.7525 41.0182 41.2739 41.4957C40.7954 41.9733 40.526 42.6213 40.525 43.2973L40.5216 45.8521L40.5303 47.1334C40.532 47.8087 40.8015 48.4556 41.2795 48.9325C41.7576 49.4094 42.4052 49.6772 43.0804 49.6773H43.0866C43.763 49.6757 44.4109 49.4054 44.888 48.926C45.3651 48.4466 45.6322 47.7973 45.6305 47.121L45.6267 45.4344C47.8195 44.7844 49.6781 43.3156 50.8171 41.3323C51.9562 39.3491 52.2884 37.0036 51.7449 34.782Z" fill="white"></path>
+                        </svg>
+                    </div>
+                    <p class="feature-text">Placement support on a few students only</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ENTERPRISE SECTION (replaced stacking section) -->
+    <section class="py-20 md:py-32 px-6 md:px-16 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative">
+            
+            <!-- Left Side: Text Content & CTA (sticky on desktop) -->
+            <div class="lg:col-span-5 text-left lg:sticky lg:top-32">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Enterprise Learning That Delivers</h2>
+                <p class="text-lg text-gray-600 mb-8">We replace theoretical lectures with practical execution. Transform your workforce into industry-ready professionals.</p>
+                <div class="max-w-[240px]">
+                    <a href="#" class="btn">Start Collaboration</a>
+                </div>
+            </div>
+
+            <!-- Right Side: Feature Cards (stacking on desktop) -->
+            <div class="lg:col-span-7 flex flex-col gap-6 md:gap-8">
+                <!-- Feature 1 -->
+                <div class="lg:sticky lg:top-32 bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Expert Mentors</h3>
+                    <p class="text-sm text-gray-600 line-height-relaxed">Your students learn directly from industry professionals who simplify real-world concepts and guide them step-by-step for practical clarity.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="lg:sticky lg:top-32 bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Real Projects</h3>
+                    <p class="text-sm text-gray-600">Students build meaningful, industry-relevant projects they can confidently present in interviews, evaluations, and discussions.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="lg:sticky lg:top-32 bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 12 12 17 22 12"></polyline><polyline points="2 17 12 22 22 17"></polyline></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Structured Flow</h3>
+                    <p class="text-sm text-gray-600">A clear, step-by-step execution system ensures every student progresses smoothly and delivers measurable outcomes.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="lg:sticky lg:top-32 bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Zero Burden</h3>
+                    <p class="text-sm text-gray-600">We manage training, tracking, and evaluation — so your faculty stays focused without additional workload.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW DEPARTMENT ADVANTAGES SECTION -->
+    <section class="bg-teal-gradient py-20 md:py-24 text-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-white">Your Department Advantages</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <div class="program-card">
+                    <h3 class="text-white text-xl md:text-2xl font-bold mb-6 md:mb-10 relative z-10">Department Reputation Boost</h3>
+                    
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6 relative z-10">
+                        <li class="flex items-start gap-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" />
+                                <path class="check-icon-mark" fill="none" d="M7 12.5l3 3 7-7" />
+                            </svg>
+                            <span class="text-white text-[14px] md:text-[15px] font-medium">Industry-ready student outcomes</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" />
+                                <path class="check-icon-mark" fill="none" d="M7 12.5l3 3 7-7" />
+                            </svg>
+                            <span class="text-white text-[14px] md:text-[15px] font-medium">Strong academic positioning</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" />
+                                <path class="check-icon-mark" fill="none" d="M7 12.5l3 3 7-7" />
+                            </svg>
+                            <span class="text-white text-[14px] md:text-[15px] font-medium">Result-driven initiatives</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" />
+                                <path class="check-icon-mark" fill="none" d="M7 12.5l3 3 7-7" />
+                            </svg>
+                            <span class="text-white text-[14px] md:text-[15px] font-medium">Visible performance</span>
+                        </li>
+                    </ul>
+
+                    <img src="https://d31bwppm8yl9g2.cloudfront.net/learner/gs/gslogo.svg" alt="" class="bg-arrow">
+                </div>
+
+                <div class="program-card">
+                    <h3 class="text-white text-xl md:text-2xl font-bold mb-6 md:mb-10 relative z-10">Zero Effort. Maximum Impact.</h3>
+                    
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-6 relative z-10">
+                        <li class="flex items-start gap-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" />
+                                <path class="check-icon-mark" fill="none" d="M7 12.5l3 3 7-7" />
+                            </svg>
+                            <span class="text-white text-[14px] md:text-[15px] font-medium">No extra faculty workload</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" />
+                                <path class="check-icon-mark" fill="none" d="M7 12.5l3 3 7-7" />
+                            </svg>
+                            <span class="text-white text-[14px] md:text-[15px] font-medium">Fully managed execution</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" />
+                                <path class="check-icon-mark" fill="none" d="M7 12.5l3 3 7-7" />
+                            </svg>
+                            <span class="text-white text-[14px] md:text-[15px] font-medium">Referral-based benefits</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" />
+                                <path class="check-icon-mark" fill="none" d="M7 12.5l3 3 7-7" />
+                            </svg>
+                            <span class="text-white text-[14px] md:text-[15px] font-medium">Priority program access</span>
+                        </li>
+                    </ul>
+
+                    <img src="https://d31bwppm8yl9g2.cloudfront.net/learner/gs/gslogo.svg" alt="" class="bg-arrow">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lucide Icons Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
